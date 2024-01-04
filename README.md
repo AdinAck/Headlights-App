@@ -2,7 +2,7 @@
 
 This repo contains the simple diagnostic app for the headlights.
 
-![](https://github.com/AdinAck/Headlights-App/assets/30732255/c4329fac-7bde-439d-8fa4-a994e4a1806a)
+![](https://github.com/AdinAck/Headlights-App/assets/30732255/a343353f-1612-4caa-9d73-9205cef6e853)
 
 This app demonstrates a few structures and concepts:
 - BLE Router

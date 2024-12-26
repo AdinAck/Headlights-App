@@ -314,7 +314,7 @@ struct DiscoveryRow<Device: BLEDevice>: View {
                 router.connect(to: device)
             }
         }
-        .onChange(of: device.loaded) { loaded in
+        .onChange(of: device.loaded) { _, loaded in
             if loaded {
                 notify.notificationOccurred(.success)
                 withAnimation {
@@ -322,7 +322,7 @@ struct DiscoveryRow<Device: BLEDevice>: View {
                 }
             }
         }
-        .onChange(of: device.invalid_characteristics) { invalid in
+        .onChange(of: device.invalid_characteristics) { _, invalid in
             if invalid {
                 notify.notificationOccurred(.error)
             }

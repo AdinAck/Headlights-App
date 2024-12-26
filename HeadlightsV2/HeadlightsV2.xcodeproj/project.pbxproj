@@ -3,23 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4030568A2AF715F6008C4B77 /* PredicateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403056892AF715F6008C4B77 /* PredicateView.swift */; };
-		4063C60F2ACA76730064791E /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4063C60E2ACA76730064791E /* Types.swift */; };
+		40066DB22B2244E20015419B /* FactoryResetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40066DB12B2244E20015419B /* FactoryResetButton.swift */; };
+		4030568A2AF715F6008C4B77 /* ResourceDependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403056892AF715F6008C4B77 /* ResourceDependent.swift */; };
 		406465362AABDF2C006C43D2 /* HeadlightsV2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406465352AABDF2C006C43D2 /* HeadlightsV2App.swift */; };
 		406465382AABDF2C006C43D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406465372AABDF2C006C43D2 /* ContentView.swift */; };
 		4064653A2AABDF2C006C43D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 406465392AABDF2C006C43D2 /* Assets.xcassets */; };
 		4064653D2AABDF2C006C43D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4064653C2AABDF2C006C43D2 /* Preview Assets.xcassets */; };
 		406465442AABE153006C43D2 /* Headlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406465432AABE153006C43D2 /* Headlight.swift */; };
 		406465482AAC096E006C43D2 /* BLERouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406465472AAC096E006C43D2 /* BLERouter.swift */; };
+		40DF86542B21812100451F25 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DF86532B21812100451F25 /* ControlView.swift */; };
+		40EACFE22B2A4DD700A376A1 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 40EACFE12B2A4DD700A376A1 /* Common */; };
+		40EACFE42B2A633C00A376A1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EACFE32B2A633C00A376A1 /* AboutView.swift */; };
+		40F9209F2B1CFF1000C1CB72 /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F9209E2B1CFF1000C1CB72 /* CommonExtensions.swift */; };
+		40F920A22B1F9F2500C1CB72 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F920A12B1F9F2500C1CB72 /* ConfigView.swift */; };
+		40F920A42B1FA0D800C1CB72 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F920A32B1FA0D800C1CB72 /* MainView.swift */; };
+		40F920A82B1FBCB800C1CB72 /* NumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F920A72B1FBCB800C1CB72 /* NumberInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		403056892AF715F6008C4B77 /* PredicateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateView.swift; sourceTree = "<group>"; };
-		4063C60E2ACA76730064791E /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		40066DB12B2244E20015419B /* FactoryResetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetButton.swift; sourceTree = "<group>"; };
+		40066DB32B224B7D0015419B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		403056892AF715F6008C4B77 /* ResourceDependent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceDependent.swift; sourceTree = "<group>"; };
 		406465322AABDF2C006C43D2 /* HeadlightsV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeadlightsV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		406465352AABDF2C006C43D2 /* HeadlightsV2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlightsV2App.swift; sourceTree = "<group>"; };
 		406465372AABDF2C006C43D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,6 +35,12 @@
 		4064653C2AABDF2C006C43D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		406465432AABE153006C43D2 /* Headlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Headlight.swift; sourceTree = "<group>"; };
 		406465472AAC096E006C43D2 /* BLERouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLERouter.swift; sourceTree = "<group>"; };
+		40DF86532B21812100451F25 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
+		40EACFE32B2A633C00A376A1 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		40F9209E2B1CFF1000C1CB72 /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
+		40F920A12B1F9F2500C1CB72 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		40F920A32B1FA0D800C1CB72 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		40F920A72B1FBCB800C1CB72 /* NumberInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40EACFE22B2A4DD700A376A1 /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,11 +74,13 @@
 		406465342AABDF2C006C43D2 /* HeadlightsV2 */ = {
 			isa = PBXGroup;
 			children = (
+				40066DB32B224B7D0015419B /* Info.plist */,
 				406465352AABDF2C006C43D2 /* HeadlightsV2App.swift */,
 				406465372AABDF2C006C43D2 /* ContentView.swift */,
 				406465432AABE153006C43D2 /* Headlight.swift */,
-				403056892AF715F6008C4B77 /* PredicateView.swift */,
-				4063C60E2ACA76730064791E /* Types.swift */,
+				40F920A02B1F9F0100C1CB72 /* Views */,
+				40F9209E2B1CFF1000C1CB72 /* CommonExtensions.swift */,
+				403056892AF715F6008C4B77 /* ResourceDependent.swift */,
 				406465472AAC096E006C43D2 /* BLERouter.swift */,
 				406465392AABDF2C006C43D2 /* Assets.xcassets */,
 				4064653B2AABDF2C006C43D2 /* Preview Content */,
@@ -77,6 +94,19 @@
 				4064653C2AABDF2C006C43D2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		40F920A02B1F9F0100C1CB72 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				40F920A12B1F9F2500C1CB72 /* ConfigView.swift */,
+				40DF86532B21812100451F25 /* ControlView.swift */,
+				40F920A72B1FBCB800C1CB72 /* NumberInput.swift */,
+				40F920A32B1FA0D800C1CB72 /* MainView.swift */,
+				40EACFE32B2A633C00A376A1 /* AboutView.swift */,
+				40066DB12B2244E20015419B /* FactoryResetButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +125,9 @@
 			dependencies = (
 			);
 			name = HeadlightsV2;
+			packageProductDependencies = (
+				40EACFE12B2A4DD700A376A1 /* Common */,
+			);
 			productName = HeadlightsV2;
 			productReference = 406465322AABDF2C006C43D2 /* HeadlightsV2.app */;
 			productType = "com.apple.product-type.application";
@@ -107,7 +140,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					406465312AABDF2C006C43D2 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -123,6 +156,9 @@
 				Base,
 			);
 			mainGroup = 406465292AABDF2B006C43D2;
+			packageReferences = (
+				40EACFE02B2A4DD700A376A1 /* XCLocalSwiftPackageReference "../../Headlights-App/Common" */,
+			);
 			productRefGroup = 406465332AABDF2C006C43D2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -149,12 +185,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4030568A2AF715F6008C4B77 /* PredicateView.swift in Sources */,
+				4030568A2AF715F6008C4B77 /* ResourceDependent.swift in Sources */,
+				40F920A42B1FA0D800C1CB72 /* MainView.swift in Sources */,
+				40DF86542B21812100451F25 /* ControlView.swift in Sources */,
 				406465442AABE153006C43D2 /* Headlight.swift in Sources */,
+				40EACFE42B2A633C00A376A1 /* AboutView.swift in Sources */,
+				40F9209F2B1CFF1000C1CB72 /* CommonExtensions.swift in Sources */,
+				40F920A22B1F9F2500C1CB72 /* ConfigView.swift in Sources */,
 				406465482AAC096E006C43D2 /* BLERouter.swift in Sources */,
 				406465382AABDF2C006C43D2 /* ContentView.swift in Sources */,
-				4063C60F2ACA76730064791E /* Types.swift in Sources */,
 				406465362AABDF2C006C43D2 /* HeadlightsV2App.swift in Sources */,
+				40F920A82B1FBCB800C1CB72 /* NumberInput.swift in Sources */,
+				40066DB22B2244E20015419B /* FactoryResetButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,13 +330,15 @@
 				DEVELOPMENT_TEAM = 84WPVNZ8GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HeadlightsV2/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,6 +346,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AdinAck.HeadlightsV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -319,13 +366,15 @@
 				DEVELOPMENT_TEAM = 84WPVNZ8GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HeadlightsV2/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,6 +382,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AdinAck.HeadlightsV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -361,6 +413,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		40EACFE02B2A4DD700A376A1 /* XCLocalSwiftPackageReference "../../Headlights-App/Common" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../Headlights-App/Common";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		40EACFE12B2A4DD700A376A1 /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4064652A2AABDF2B006C43D2 /* Project object */;
 }

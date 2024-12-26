@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         scanner.discovery { devices in
             if let first = devices.first {
-                HeadlightView()
+                MainView()
                     .environmentObject(first)
             }
         }

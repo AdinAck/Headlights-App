@@ -8,37 +8,46 @@
 import Foundation
 import SwiftUI
 import CoreBluetooth
-import Combine
+import Common
 
 enum EndPoint {
-    case request,
+    case properties,
+         request,
          status,
-         brightness,
-        monitor,
-        pid
+         control,
+         monitor,
+         config,
+         reset,
+         appError
 }
 
 class Headlight: BLEDevice {
     static let SERVICE_UUID = CBUUID(string: "0b2adcf1-38a7-48f9-a61d-8311fe471b70")
     
-    @Published var status: HeadlightStatusPacket!
-    @Published var brightness: HeadlightBrightnessPacket!
-    @Published var monitor: HeadlightMonitorPacket!
-    @Published var pid: HeadlightPIDPacket!
+    @Published var properties: Properties!
+    @Published var status: Status!
+    @Published var control: Control!
+    @Published var monitor: Monitor!
+    @Published var config: Config!
+    @Published var appError: AppError!
     
-    private var characteristic_uuids: [CBUUID: EndPoint] = [
+    private let characteristic_uuids: [CBUUID: EndPoint] = [
+        CBUUID(string: "939f1423-2a0f-4a87-931f-5dae0b1ded7a"): .properties,
         CBUUID(string: "9a00bcc5-89f1-4b9d-88bd-f2033440a5b4"): .request,
         CBUUID(string: "ccf82e46-5f1c-4671-b481-7ffd2854fed4"): .status,
-        CBUUID(string: "eb483eeb-7b8e-45e0-910b-6c88fb3d75f3"): .brightness,
+        CBUUID(string: "eb483eeb-7b8e-45e0-910b-6c88fb3d75f3"): .control,
         CBUUID(string: "30f62c01-d9d8-4c14-9a66-36ad0d92edbf"): .monitor,
-        CBUUID(string: "73e4b52c-4ae2-4901-b78b-8f95f3a60cdb"): .pid
+        CBUUID(string: "73e4b52c-4ae2-4901-b78b-8f95f3a60cdb"): .config,
+        CBUUID(string: "a7e05ec9-ed47-49fe-8b5b-4d030c687032"): .reset,
+        CBUUID(string: "a16bc310-eb50-414e-87b3-2199e79523c2"): .appError,
     ]
     
     private let notify: [EndPoint] = [
         .status,
-        .brightness,
+        .control,
         .monitor,
-        .pid
+        .config,
+        .appError
     ]
     
     private var characteristics: [EndPoint: CBCharacteristic] = [:]
@@ -50,31 +59,28 @@ class Headlight: BLEDevice {
         // init dispatch
         ble_dispatch = [
             .status: { characteristic in
-                if let status = HeadlightStatusPacket(from: characteristic.value!) {
+                if let status = Status(from: characteristic.value!) {
                     self.status = status
-                } else {
-                    print("[BLE] [WARN] Received bad value for \"status\".")
                 }
             },
-            .brightness: { characteristic in
-                if let brightness = HeadlightBrightnessPacket(from: characteristic.value!) {
-                    self.brightness = brightness
-                } else {
-                    print("[BLE] [WARN] Received bad value for \"brightness\".")
+            .control: { characteristic in
+                if let control = Control(from: characteristic.value!) {
+                    self.control = control
                 }
             },
             .monitor: { characteristic in
-                if let monitor = HeadlightMonitorPacket(from: characteristic.value!) {
+                if let monitor = Monitor(from: characteristic.value!) {
                     self.monitor = monitor
-                } else {
-                    print("[BLE] [WARN] Received bad value for \"monitor\".")
                 }
             },
-            .pid: { characteristic in
-                if let pid = HeadlightPIDPacket(from: characteristic.value!) {
-                    self.pid = pid
-                } else {
-                    print("[BLE] [WARN] Received bad value for \"pid\".")
+            .config: { characteristic in
+                if let config = Config(from: characteristic.value!) {
+                    self.config = config
+                }
+            },
+            .appError: { characteristic in
+                if let appError = AppError(from: characteristic.value!) {
+                    self.appError = appError
                 }
             },
         ]
@@ -85,8 +91,21 @@ class Headlight: BLEDevice {
         peripheral.discoverServices([Self.SERVICE_UUID])
     }
     
-    func request(for request: HeadlightRequest) {
-        peripheral.writeValue(Data([request.rawValue]), for: characteristics[.request]!, type: .withResponse)
+    func request(for request: Request) {
+        send(data: request.serialize(), to: .request)
+    }
+    
+    /*
+     special because it does not necessitate
+     UART usage, and is constant within a
+     firmware version
+     */
+    func getProperties() {
+        peripheral.readValue(for: characteristics[.properties]!)
+    }
+    
+    func send(data: Data, to endpoint: EndPoint) {
+        peripheral.writeValue(data, for: characteristics[endpoint]!, type: .withResponse)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -132,141 +151,35 @@ class Headlight: BLEDevice {
             peripheral.setNotifyValue(true, for: characteristics[endpoint]!)
         }
         
-        withAnimation {
-            loaded = true
-        }
-        
-        print("[BLE] [INFO] All expected characteristics discovered.")
+        // only finalize connection once properties are loaded
+        getProperties()
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard let endpoint = characteristic_uuids[characteristic.uuid] else {
-            print("[BLE] [WARN] Received value for characteristic with uuid \"\(characteristic.uuid)\" with no associated endpoint.")
-            return
-        }
-        guard let dispatched = ble_dispatch[endpoint] else {
-            print("[BLE] [WARN] No dispatch handler for endpoint \"\(endpoint)\" is defined.")
-            return
-        }
-        
-//        print("[BLE] [INFO] New value for \"\(endpoint)\".")
-        
-        withAnimation {
-            dispatched(characteristic)
-        }
-    }
-}
-
-struct HeadlightView: View {
-    @EnvironmentObject var model: Headlight
-    
-    var body: some View {
-        PredicateView {
-            model.status != nil &&
-            model.brightness != nil &&
-            model.monitor != nil &&
-            model.pid != nil
-        } inactive: {
-            VStack {
-                ProgressView()
-                    .frame(maxHeight: .infinity)
-                
-                Button("Disconnect") {
-                    model.disconnect()
-                }
-                .buttonStyle(.borderedProminent)
-                .padding()
+        if loaded == false && characteristic_uuids[characteristic.uuid] == .properties {
+            guard let properties = Properties(from: characteristic.value!) else { return }
+            self.properties = properties
+            
+            withAnimation {
+                loaded = true
             }
-        } active: {
-            List {
-                Section("Status") {
-                    HStack {
-                        Text("State")
-                        Spacer()
-                        Text("\(model.status.state.rawValue)")
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    HStack {
-                        Text("Error")
-                        Spacer()
-                        Text("\(model.status.error.rawValue)")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                
-                Section("Brightness") {
-                    HStack {
-                        Text("Brightness")
-                        Spacer()
-                        Text("\(model.brightness.brightness)")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                
-                Section("Monitor") {
-                    HStack {
-                        Text("Duty")
-                        Spacer()
-                        Text("\(model.monitor.duty)")
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    HStack {
-                        Text("Current")
-                        Spacer()
-                        Text("\(model.monitor.current)")
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    HStack {
-                        Text("Temperature")
-                        Spacer()
-                        Text("\(model.monitor.temperature)")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                
-                Section("PIDs") {
-                    HStack {
-                        Text("k_p")
-                        Spacer()
-                        Text("\(model.pid.k_p)")
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    HStack {
-                        Text("k_i")
-                        Spacer()
-                        Text("\(model.pid.k_i)")
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    HStack {
-                        Text("k_d")
-                        Spacer()
-                        Text("\(model.pid.k_d)")
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    HStack {
-                        Text("div")
-                        Spacer()
-                        Text("\(model.pid.div)")
-                            .foregroundStyle(.secondary)
-                    }
-                }
-                
-                Button("Disconnect") {
-                    model.disconnect()
-                }
-                .buttonStyle(.borderedProminent)
+            
+            print("[BLE] [INFO] All expected characteristics discovered and device properties loaded.")
+        } else {
+            guard let endpoint = characteristic_uuids[characteristic.uuid] else {
+                print("[BLE] [WARN] Received value for characteristic with uuid \"\(characteristic.uuid)\" with no associated endpoint.")
+                return
             }
-        }
-        .onAppear {
-            model.request(for: .status)
-            model.request(for: .brightness)
-            model.request(for: .monitor)
+            guard let dispatched = ble_dispatch[endpoint] else {
+                print("[BLE] [WARN] No dispatch handler for endpoint \"\(endpoint)\" is defined.")
+                return
+            }
+            
+            //        print("[BLE] [INFO] New value for \"\(endpoint)\".")
+            
+            withAnimation {
+                dispatched(characteristic)
+            }
         }
     }
 }
